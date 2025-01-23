@@ -8,18 +8,21 @@ import seaborn as sns
 data_folder = 'data'
 file_list = os.listdir(data_folder)
 
-
-
-for file_name in file_list:
+@st.cache_data
+def do_magic():
+  for file_name in file_list:
     file_path = os.path.join(data_folder, file_name)
 
     # Check the file extension and import accordingly
     if file_name.endswith('.csv'):
-        print(file_path)
-        df = pd.read_csv(file_path)
+      print(file_path)
+      return pd.read_csv(file_path)
 
 
 
+
+
+df = do_magic()
 
 
 st.title("Titanic : binary classification project")
